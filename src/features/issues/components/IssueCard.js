@@ -8,6 +8,9 @@ import clsx from "clsx";
 import { CircularProgress} from "@material-ui/core";
 
 const useStyles = makeStyles({
+  root: {
+    cursor: "pointer"
+  },
   header: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -41,7 +44,7 @@ export default function IssueCard(
   }) {
   const classes = useStyles();
   return (
-    <Card variant="outlined" className={clsx({[classes.selected]: selected})} onClick={onSelect}>
+    <Card variant="outlined" className={clsx(classes.root, {[classes.selected]: selected})} onClick={onSelect}>
       <CardContent>
         <div className={classes.header}>
           <Typography variant="h6" component="h4">
