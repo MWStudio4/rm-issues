@@ -14,6 +14,7 @@ import {Backdrop, CircularProgress, FormControl, Grid, Select} from "@material-u
 import {makeStyles} from "@material-ui/core/styles";
 import {STATUS_DONE, STATUS_IN_PROGRESS, STATUS_TODO} from "../../constants/statuses";
 import Button from "@material-ui/core/Button";
+import {sortByStatus} from "../../helpers/sorting";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -91,12 +92,14 @@ export function Issues() {
     setFormStatus(event.target.value);
   }
 
+  const sorted = sortByStatus(issues);
+
   return (
     <>
       <div className={classes.root} onClick={onClearSelection}>
         <Grid container>
           {
-            issues && Array.isArray(issues) && issues.length > 0 ? issues.map(issue => (
+            issues && Array.isArray(issues) && issues.length > 0 ? sorted.map(issue => (
               <Grid item xs={3} className={classes.card} key={issue.id}>
                 <IssueCard id={issue.id} status={issue.status} summary={issue.summary}
                            selected={selected.includes(issue.id)} onSelect={onSelect(issue.id)}
